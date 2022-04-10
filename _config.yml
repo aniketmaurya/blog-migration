@@ -7,7 +7,7 @@
 # https://learnxinyminutes.com/docs/yaml/
 
 title: AI with Aniket
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+description: Blogs on Machine Learning, Deep Learning and Software Development
 github_username: aniketmaurya
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "blog-migration"
@@ -58,7 +58,7 @@ annotations: true
 show_tags: true
 
 # Add your Google Analytics ID here if you have one and want to use it
-google_analytics: 
+google_analytics: UA-156199072-1
 
 exclude:
   - docker-compose.yml
