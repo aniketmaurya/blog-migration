@@ -1,1 +1,1 @@
-Sitemap: https://aniketmaurya.github.io/blog-migration/sitemap.xml
+Sitemap: https://blog.aniketmaurya.com/sitemap.xml
