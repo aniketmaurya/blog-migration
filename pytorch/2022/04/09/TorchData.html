@@ -158,8 +158,7 @@ window.onload = wrap_img;
 <h2 id="In-this-tutorial,-we-will-learn-about-TorchData">
 <a class="anchor" href="#In-this-tutorial,-we-will-learn-about-TorchData" aria-hidden="true"><span class="octicon octicon-link"></span></a>In this tutorial, we will learn about TorchData<a class="anchor-link" href="#In-this-tutorial,-we-will-learn-about-TorchData"> </a>
 </h2>
-<p><img src="https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1330&amp;q=80" alt="">
-Photo by <a href="https://unsplash.com/@realaxer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">T K</a> on <a href="https://unsplash.com/s/photos/pipe?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+<p><img src="https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1330&amp;q=80" alt="" title="Photo by T K on Unsplash"></p>
 
 </div>
 </div>
@@ -231,24 +230,13 @@ Photo by <a href="https://unsplash.com/@realaxer?utm_source=unsplash&amp;utm_med
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We will use CIFAR-10 dataset which has the same structure as we discussed.</p>
-<blockquote>
-<p>From TorchData docs:</p>
-</blockquote>
-
+<p>We will use CIFAR-10 dataset which has the same structure as we discussed.
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    <strong>Note: </strong><strong>From TorchData docs:</strong> We have implemented over 50 DataPipes that provide different core functionalities, such as opening files, parsing texts, transforming samples, caching, shuffling, and batching. For users who are interested in connecting to cloud providers (such as Google Drive or AWS S3), the fsspec and iopath DataPipes will allow you to do so. The documentation provides detailed explanations and usage examples of each IterDataPipe and MapDataPipe.
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p></p>
-<div class="Toast">
-   <span class="Toast-icon"><svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
-   <span class="Toast-content">We have implemented over 50 DataPipes that provide different core functionalities, such as opening files, parsing texts, transforming samples, caching, shuffling, and batching. For users who are interested in connecting to cloud providers (such as Google Drive or AWS S3), the fsspec and iopath DataPipes will allow you to do so. The documentation provides detailed explanations and usage examples of each IterDataPipe and MapDataPipe.</span>
-</div>
-
-<p>Basically, TorchData has already implemented 50 DataPipes which you can use directly. Here we will use use <code>FileOpener</code> and <code>parse_csv</code> to read the csv data.</p>
+Basically, TorchData has already implemented 50 DataPipes which you can use directly. Here we will use use <code>FileOpener</code> and <code>parse_csv</code> to read the csv data.
 
 </div>
 </div>
