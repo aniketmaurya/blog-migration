@@ -139,7 +139,7 @@
   
       ,"page1": {
           "title": "About Me",
-          "content": "This website is powered by fastpages 1. . a blogging platform that natively supports Jupyter notebooks in addition to other formats. &#8617; . |",
+          "content": ". 👋 I’m a Developer Advocate at Grid.ai | PyTorch Lightning 🥑⚡️. I build Intelligent Software with ML and create/maintain some cool open-source ML/DL/Python libraries. I’ve created Gradsflow and Chitra - Python Libraries with aim to simplify AutoML and MLOps. . I love building problem solving products that leverage Artificial Intelligence. I’ve expertise in building and deploying scalable Deep Learning system in production. I’ve worked on complete end-to-end process of Deep Learning i.e. Data creation, Model Training, API Development to Deployment. . I believe in continuous learning, open-source and knowledge sharing. Started my YouTube channel to share educational video tutorials and tech Meetup on Machine Learning and Python Software development. . | | | | . Contact me to talk about ML/AI, freelancing or consulation. . This website is powered by fastpages .",
           "url": "https://aniketmaurya.com/about/",
           "relUrl": "/about/",
           "date": ""
