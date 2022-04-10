@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://aniketmaurya.com/tensorflow/face%20recognition/2019/01/07/face-recognition.html</loc>
+<lastmod>2019-01-07T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://aniketmaurya.com/object%20detection/2020/01/13/EfficientDet.html</loc>
+<lastmod>2020-01-13T00:00:00-06:00</lastmod>
+</url>
+<url>
 <loc>https://aniketmaurya.com/markdown/2020/01/14/test-markdown-post.html</loc>
 <lastmod>2020-01-14T00:00:00-06:00</lastmod>
 </url>
@@ -11,6 +19,10 @@
 <url>
 <loc>https://aniketmaurya.com/machine%20learning/2020/03/27/Linear-Regression-Scratch.html</loc>
 <lastmod>2020-03-27T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://aniketmaurya.com/tensorflow/2020/04/08/tf.data-Creating-Data-Input-Pipelines.html</loc>
+<lastmod>2020-04-08T00:00:00-05:00</lastmod>
 </url>
 <url>
 <loc>https://aniketmaurya.com/gans/2020/11/16/DCGAN-in-PyTorch-Tutorial.html</loc>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>EfficientDet: When Object Detection Meets Scalability and Efficiency | AI with Aniket</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="EfficientDet: When Object Detection Meets Scalability and Efficiency" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="EfficientDet, highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team." />
+<meta property="og:description" content="EfficientDet, highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team." />
+<link rel="canonical" href="https://aniketmaurya.com/object%20detection/2020/01/13/EfficientDet.html" />
+<meta property="og:url" content="https://aniketmaurya.com/object%20detection/2020/01/13/EfficientDet.html" />
+<meta property="og:site_name" content="AI with Aniket" />
+<meta property="og:image" content="https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-01-13-EfficientDet/compare.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-13T00:00:00-06:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-01-13-EfficientDet/compare.png" />
+<meta property="twitter:title" content="EfficientDet: When Object Detection Meets Scalability and Efficiency" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-01-13T00:00:00-06:00","datePublished":"2020-01-13T00:00:00-06:00","description":"EfficientDet, highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team.","headline":"EfficientDet: When Object Detection Meets Scalability and Efficiency","image":"https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-01-13-EfficientDet/compare.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://aniketmaurya.com/object%20detection/2020/01/13/EfficientDet.html"},"url":"https://aniketmaurya.com/object%20detection/2020/01/13/EfficientDet.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://aniketmaurya.com/feed.xml" title="AI with Aniket" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">AI with Aniket</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">EfficientDet: When Object Detection Meets Scalability and Efficiency</h1><p class="page-description">EfficientDet, highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-01-13T00:00:00-06:00" itemprop="datePublished">
+        Jan 13, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Object Detection">Object Detection</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h3"><a href="#comparison-of-efficientdet-detectors06-with-other-sota-object-detection-models">Comparison of EfficientDet detectors[0–6] with other SOTA object detection models.</a></li>
+<li class="toc-entry toc-h2"><a href="#quick-overview-of-the-paper">Quick Overview of the Paper</a></li>
+<li class="toc-entry toc-h2"><a href="#bifpn">BiFPN</a></li>
+<li class="toc-entry toc-h2"><a href="#weighted-feature-fusion">Weighted Feature Fusion</a></li>
+<li class="toc-entry toc-h2"><a href="#efficientdet-architecture">EfficientDet Architecture</a></li>
+<li class="toc-entry toc-h2"><a href="#references">References</a></li>
+</ul><p>EfficientDet, a highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team. It is not just a single model. It has a family of detectors which achieve better accuracy with an order-of-magnitude fewer parameters and FLOPS than previous object detectors.</p>
+
+<p>EfficientDet paper has mentioned its 7 family members.</p>
+
+<blockquote>
+  <h3 id="comparison-of-efficientdet-detectors06-with-other-sota-object-detection-models">
+<a class="anchor" href="#comparison-of-efficientdet-detectors06-with-other-sota-object-detection-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comparison of EfficientDet detectors[0–6] with other SOTA object detection models.</h3>
+</blockquote>
+
+<p><img src="https://cdn-images-1.medium.com/max/3360/1*wVXzRV58CNjHMV24FMFz7g.png" alt="Source: [arXiv:1911.09070v1](https://arxiv.org/abs/1911.09070)"><em>Source: <a href="https://arxiv.org/abs/1911.09070">arXiv:1911.09070v1</a></em></p>
+
+<h2 id="quick-overview-of-the-paper">
+<a class="anchor" href="#quick-overview-of-the-paper" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Overview of the Paper</h2>
+
+<ol>
+  <li>
+    <p><strong><a href="https://arxiv.org/abs/1905.11946">EfficientNet</a></strong> is the backbone architecture used in the model. EfficientNet is also written by the same authors at Google. Conventional CNN models arbitrarily scaled network dimensions- <em>width, depth and resolution</em>. EfficientNet uniformly scales each dimension with a fixed set of scaling coefficients. It surpassed SOTA accuracy with 10x efficiency.</p>
+  </li>
+  <li>
+    <p><strong>BiFPN</strong>: While <em>fusing</em> (applying <a href="https://arxiv.org/abs/1512.03385">residual or skip connections</a>) different input features, most of the works simply summed them up without any distinction. Since both input features are at the different resolutions they don’t equally contribute to the fused output layer. The paper proposes a weighted bi-directional feature pyramid network (BiFPN), which introduces learnable weights to learn the importance of different input features.</p>
+  </li>
+  <li>
+    <p><strong>Compound Scaling</strong>: For higher accuracy previous object detection models relied on — bigger backbone or larger input image sizes. Compound Scaling is a method that uses a simple compound coefficient <strong>φ</strong> to jointly scale-up all dimensions of the backbone network, BiFPN network, class/box network, and resolution.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Combining EfficientNet backbones with our propose BiFPN and compound scaling, we have developed a new family of object detectors, named EfficientDet, which consistently achieve better accuracy with an order-of-magnitude fewer parameters and FLOPS than previous object detectors.</p>
+</blockquote>
+
+<h2 id="bifpn">
+<a class="anchor" href="#bifpn" aria-hidden="true"><span class="octicon octicon-link"></span></a>BiFPN</h2>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*ZqkRP7n8Xh-PILCuX1510A.png" alt="Source: [arXiv:1911.09070v1](https://arxiv.org/abs/1911.09070) — figure 2"><em>Source: <a href="https://arxiv.org/abs/1911.09070">arXiv:1911.09070v1</a> — figure 2</em></p>
+
+<p>Conventional FPN (Feature Pyramid Network) is limited by the one-way information flow. <a href="https://arxiv.org/pdf/1803.01534.pdf">PANet</a> added an extra bottom-up path for information flow. PANet achieved better accuracy but with the cost and more parameters and computations. The paper proposed several optimizations for cross-scale connections:</p>
+
+<ol>
+  <li>
+    <p>Remove Nodes that only have one input edge. 
+<em>If a node has only one input edge with no feature fusion, then it will have less contribution to the feature network that aims at fusing different features.</em></p>
+  </li>
+  <li>
+    <p>Add an extra edge from the original input to output node if they are at the same level, in order to fuse more features without adding much cost.</p>
+  </li>
+  <li>
+    <p>Treat each bidirectional (top-down &amp; bottom-up) path as one feature network layer, and repeat the same layer multiple times to enable more high-level feature fusion.</p>
+  </li>
+</ol>
+
+<h2 id="weighted-feature-fusion">
+<a class="anchor" href="#weighted-feature-fusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Weighted Feature Fusion</h2>
+
+<p>While multi-scale fusion, input features are not simply summed up. The authors proposed to add additional weight for each input during feature fusion and let the network to learn the importance of each input feature. Out of three weighted fusion approaches — 
+<strong>Unbounded fusion:</strong></p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*rv-MpuUiv-uVs5Trx4XI1Q.png" alt="Source: [https://arxiv.org/abs/1911.09070](https://arxiv.org/abs/1911.09070)"><em>Source: <a href="https://arxiv.org/abs/1911.09070">https://arxiv.org/abs/1911.09070</a></em></p>
+
+<p>Where <em>W</em> is a learnable weight that can be a scalar (per-feature), a vector (per-channel), or a multi-dimensional tensor (per-pixel). Since the scalar weight is unbounded, it could potentially cause training instability. So, Softmax-based fusion was tried for normalized weights.
+<strong>Softmax-based fusion:</strong></p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*AhA54rA3NcNFEuosOac_YA.png" alt="Source: [https://arxiv.org/abs/1911.09070](https://arxiv.org/abs/1911.09070)"></p>
+
+<p>As softmax normalizes the weights to be the probability of range 0 to 1 which can denote the importance of each input. The softmax leads to a slowdown on GPU.
+<strong>Fast normalized fusion:</strong></p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*AO0A5dDSJl0GKeUvYYc4cQ.png" alt="Source: [https://arxiv.org/abs/1911.09070](https://arxiv.org/abs/1911.09070)"></p>
+
+<p>Є is added for numeric stability. It is 30% faster on GPU and gave almost as accurate results as softmax.</p>
+<blockquote>
+  <p>Final BiFPN integrates both the bidirectional cross-scale connections and the fast normalized fusion.</p>
+</blockquote>
+
+<h2 id="efficientdet-architecture">
+<a class="anchor" href="#efficientdet-architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>EfficientDet Architecture</h2>
+
+<p><img src="https://cdn-images-1.medium.com/max/4062/1*nP0LlBoz0Uqhd17T4bINzg.png" alt="Source: [arXiv:1911.09070v1](https://arxiv.org/abs/1911.09070) — figure 3"><em>Source: <a href="https://arxiv.org/abs/1911.09070">arXiv:1911.09070v1</a> — figure 3</em></p>
+
+<p>EfficientDet follows one-stage-detection paradigm. A pre-trained EfficientNet backbone is used with BiFPN as the feature extractor. BiFPNN takes {P3, P4, P5, P6, P7} features from the EfficientNet backbone network and repeatedly applies bidirectional feature fusion.
+The fused features are fed to a class and bounding box network for predicting object class and bounding box.</p>
+
+<h2 id="references">
+<a class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h2>
+
+<p><a href="https://arxiv.org/abs/1911.09070">EfficientDet: Scalable and Efficient Object Detection</a></p>
+
+<p><a href="https://arxiv.org/abs/1905.11946">EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks</a></p>
+
+<p><a href="https://arxiv.org/abs/1803.01534">Path Aggregation Network for Instance Segmentation</a></p>
+
+<p><a href="https://arxiv.org/abs/1512.03385">Deep Residual Learning for Image Recognition</a></p>
+
+<hr>
+
+<p><br></p>
+<blockquote>
+  <p>Hope you liked the article.</p>
+</blockquote>
+
+<p>👉 <a href="https://twitter.com/aniketmaurya">Twitter</a>: <a href="https://twitter.com/aniketmaurya">https://twitter.com/aniketmaurya</a>
+👉 Mail: aniketmaurya@outlook.com</p>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="aniketmaurya/blog-migration"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/object%20detection/2020/01/13/EfficientDet.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/aniketmaurya" target="_blank" title="aniketmaurya"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/aniketmaurya" target="_blank" title="aniketmaurya"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>tf.data: Creating data input pipelines | AI with Aniket</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="tf.data: Creating data input pipelines" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Building scalabale data input pipeline with Tensorflow tf.data." />
+<meta property="og:description" content="Building scalabale data input pipeline with Tensorflow tf.data." />
+<link rel="canonical" href="https://aniketmaurya.com/tensorflow/2020/04/08/tf.data-Creating-Data-Input-Pipelines.html" />
+<meta property="og:url" content="https://aniketmaurya.com/tensorflow/2020/04/08/tf.data-Creating-Data-Input-Pipelines.html" />
+<meta property="og:site_name" content="AI with Aniket" />
+<meta property="og:image" content="https://raw.githubusercontent.com/aniketmaurya/chitra/master/chitra_banner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-08T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://raw.githubusercontent.com/aniketmaurya/chitra/master/chitra_banner.png" />
+<meta property="twitter:title" content="tf.data: Creating data input pipelines" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-04-08T00:00:00-05:00","datePublished":"2020-04-08T00:00:00-05:00","description":"Building scalabale data input pipeline with Tensorflow tf.data.","headline":"tf.data: Creating data input pipelines","image":"https://raw.githubusercontent.com/aniketmaurya/chitra/master/chitra_banner.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://aniketmaurya.com/tensorflow/2020/04/08/tf.data-Creating-Data-Input-Pipelines.html"},"url":"https://aniketmaurya.com/tensorflow/2020/04/08/tf.data-Creating-Data-Input-Pipelines.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://aniketmaurya.com/feed.xml" title="AI with Aniket" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">AI with Aniket</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">tf.data: Creating data input pipelines</h1><p class="page-description">Building scalabale data input pipeline with Tensorflow tf.data.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-08T00:00:00-05:00" itemprop="datePublished">
+        Apr 8, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Tensorflow">Tensorflow</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#why-do-we-need-tfdata">Why do we need tf.data?</a></li>
+<li class="toc-entry toc-h2"><a href="#loading-data-for-classification">Loading data for classification</a></li>
+</ul><p>Are you not able to load your NumPy data into memory?
+Does your model have to wait for data to be loaded after each epoch?
+Is your Keras DataGenerator slow?</p>
+
+<p>TensorFlow <strong><em><a href="https://www.tensorflow.org/api_docs/python/tf/data">tf.data</a></em></strong> API allows building complex input pipelines. It easily handles a large amount of data and can read different formats of data while allowing complex data transformations.</p>
+
+<h2 id="why-do-we-need-tfdata">
+<a class="anchor" href="#why-do-we-need-tfdata" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why do we need tf.data?</h2>
+
+<p>A training step involves the following steps:</p>
+<ol>
+  <li>File reading</li>
+  <li>Fetch or parse data</li>
+  <li>Data transformation</li>
+  <li>Using the data to train the model.</li>
+</ol>
+
+<p><img src="https://cdn-images-1.medium.com/max/4580/1*Wm8r4SSP2FjKXDu3H4swUA.png" alt="source: [Tensorflow](https://www.tensorflow.org/guide/data_performance) (CC0)"><em>source: <a href="https://www.tensorflow.org/guide/data_performance">Tensorflow</a></em></p>
+
+<p>If you have a large amount of data and you’re unable to load it into the memory, you may want to use <a href="https://www.tensorflow.org/guide/data#consuming_python_generators">Generators</a>. But Generators has limited portability and scalability.</p>
+
+<p>After every epoch, you will wait for data to be transformed into a consumable format by the model and during that time your model sits idle, not doing any training. This leads to low CPU and GPU utilization.</p>
+
+<p>One solution to handle this is to <strong><a href="https://www.tensorflow.org/guide/data_performance#prefetching">prefetch</a></strong> your data in advance and you won’t have to wait for data to be loaded.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/4088/1*7ijyt5E5XvQs23I0dD2GhA.png" alt="source: [Tensorflow](https://www.tensorflow.org/guide/data_performance) (CC0)"><em>source: <a href="https://www.tensorflow.org/guide/data_performance">Tensorflow</a></em></p>
+
+<p><strong>tf.data</strong> is a data input pipeline building API than you can use to easily build your data pipeline. Whether you want to read data from local files or even if your data is stored remotely.</p>
+
+<h2 id="loading-data-for-classification">
+<a class="anchor" href="#loading-data-for-classification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Loading data for classification</h2>
+
+<p>To train an image classification model, we create a CNN model and feed our data to the model. I want to train a Cats vs Dogs classifier and my data is stored in the following folder structure.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data
+└── train
+    ├── cat -&gt; contains images of cats
+    └── dog -&gt; contains images of dogs*
+</code></pre></div></div>
+
+<p><em>We first find the path of all the images-</em></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+
+<span class="n">image_path_list</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s">'data/train/*/*.jpg'</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">Dataset</span><span class="p">.</span><span class="n">list_files</span><span class="p">(</span><span class="n">image_path_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">tf.data.Dataset.list_files</code> converts the list returned by glob method to the Dataset object. Now, we will load the images and their class.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">load_images</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    
+    <span class="n">image</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">decode_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">strings</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nb">map</span><span class="p">(</span><span class="n">load_images</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>So, the <strong><em>data</em></strong> object now has images and labels. But this is not it, we will have to resize the image, preprocess and apply transformations.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">IMG_HEIGHT</span><span class="p">,</span> <span class="n">IMG_WIDTH</span><span class="p">))</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">random_flip_left_right</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">random_flip_up_down</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="n">image</span> <span class="o">/=</span> <span class="mf">255.</span>
+    <span class="n">image</span> <span class="o">-=</span> <span class="mf">0.5</span>
+
+    <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nb">map</span><span class="p">(</span><span class="n">preprocess</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I have created a small library named <strong><em><a href="https://github.com/aniketmaurya/chitra">Chitra</a>,</em></strong> based on <em>tf.data</em> that can be used to skip all these steps.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">chitra</span> <span class="kn">import</span> <span class="n">dataloader</span> <span class="k">as</span> <span class="n">dl</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s">'./data/train'</span>
+
+<span class="n">train_dl</span> <span class="o">=</span> <span class="n">dl</span><span class="p">.</span><span class="n">Clf</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">train_dl</span><span class="p">.</span><span class="n">from_folder</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">target_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">244</span><span class="p">),</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># to visualize the data
+</span><span class="n">train_dl</span><span class="p">.</span><span class="n">show_batch</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><strong>You can just specify the path of your data and it will be loaded with the target size.</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/aniketmaurya/chitra/master/chitra_banner.png" alt=""></p>
+<blockquote>
+  <p><em>You can find my code at <a href="https://github.com/aniketmaurya/chitra">https://github.com/aniketmaurya/chitra</a></em></p>
+</blockquote>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="aniketmaurya/blog-migration"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/tensorflow/2020/04/08/tf.data-Creating-Data-Input-Pipelines.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/aniketmaurya" target="_blank" title="aniketmaurya"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/aniketmaurya" target="_blank" title="aniketmaurya"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
