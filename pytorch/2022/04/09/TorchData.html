@@ -96,7 +96,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      3 min read
     
 </span></p>
 
@@ -158,8 +158,8 @@ window.onload = wrap_img;
 <h2 id="In-this-tutorial,-we-will-learn-about-TorchData">
 <a class="anchor" href="#In-this-tutorial,-we-will-learn-about-TorchData" aria-hidden="true"><span class="octicon octicon-link"></span></a>In this tutorial, we will learn about TorchData<a class="anchor-link" href="#In-this-tutorial,-we-will-learn-about-TorchData"> </a>
 </h2>
-<p><img src="https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1330&amp;q=80" alt=""></p>
-<p>Photo by <a href="https://unsplash.com/@realaxer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">T K</a> on <a href="https://unsplash.com/s/photos/pipe?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+<p><img src="https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1330&amp;q=80" alt="">
+Photo by <a href="https://unsplash.com/@realaxer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">T K</a> on <a href="https://unsplash.com/s/photos/pipe?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 
 </div>
 </div>
@@ -232,6 +232,9 @@ window.onload = wrap_img;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will use CIFAR-10 dataset which has the same structure as we discussed.</p>
+<blockquote>
+<p>From TorchData docs:</p>
+</blockquote>
 
 </div>
 </div>
@@ -239,14 +242,12 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote>
-<p>From TorchData docs:</p>
+<p></p>
 <div class="Toast">
    <span class="Toast-icon"><svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
    <span class="Toast-content">We have implemented over 50 DataPipes that provide different core functionalities, such as opening files, parsing texts, transforming samples, caching, shuffling, and batching. For users who are interested in connecting to cloud providers (such as Google Drive or AWS S3), the fsspec and iopath DataPipes will allow you to do so. The documentation provides detailed explanations and usage examples of each IterDataPipe and MapDataPipe.</span>
 </div>
 
-</blockquote>
 <p>Basically, TorchData has already implemented 50 DataPipes which you can use directly. Here we will use use <code>FileOpener</code> and <code>parse_csv</code> to read the csv data.</p>
 
 </div>
@@ -652,116 +653,17 @@ window.onload = wrap_img;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">flash.image</span> <span class="kn">import</span> <span class="n">ImageClassifier</span>
 <span class="kn">import</span> <span class="nn">flash</span>
+
+<span class="c1"># Create an Image Classifier Model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ImageClassifier</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">backbone</span><span class="o">=</span><span class="s2">"efficientnet_b0"</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Create the trainer and finetune the model</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">flash</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dl</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ImageClassifier</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">backbone</span><span class="o">=</span><span class="s2">"efficientnet_b0"</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Using 'efficientnet_b0' provided by rwightman/pytorch-image-models (https://github.com/rwightman/pytorch-image-models).
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">flash</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>GPU available: False, used: False
-TPU available: False, using: 0 TPU cores
-IPU available: False, using: 0 IPUs
-HPU available: False, using: 0 HPUs
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dl</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-  | Name          | Type           | Params
--------------------------------------------------
-0 | train_metrics | ModuleDict     | 0     
-1 | val_metrics   | ModuleDict     | 0     
-2 | test_metrics  | ModuleDict     | 0     
-3 | adapter       | DefaultAdapter | 4.0 M 
--------------------------------------------------
-4.0 M     Trainable params
-0         Non-trainable params
-4.0 M     Total params
-16.081    Total estimated model params size (MB)
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
