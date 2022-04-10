@@ -10,17 +10,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Learn How to load image data with TorchData and train Image classifier" />
 <meta property="og:description" content="Learn How to load image data with TorchData and train Image classifier" />
-<link rel="canonical" href="https://aniketmaurya.com/pytorch/2022/04/09/TorchData.html" />
-<meta property="og:url" content="https://aniketmaurya.com/pytorch/2022/04/09/TorchData.html" />
+<link rel="canonical" href="https://aniketmaurya.com/pytorch/2022/04/10/TorchData.html" />
+<meta property="og:url" content="https://aniketmaurya.com/pytorch/2022/04/10/TorchData.html" />
 <meta property="og:site_name" content="AI with Aniket" />
 <meta property="og:image" content="https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1330&q=80" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-04-09T00:00:00-05:00" />
+<meta property="article:published_time" content="2022-04-10T00:00:00-05:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1330&q=80" />
 <meta property="twitter:title" content="TorchData: PyTorch Composable Data loading utility library" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-04-09T00:00:00-05:00","datePublished":"2022-04-09T00:00:00-05:00","description":"Learn How to load image data with TorchData and train Image classifier","headline":"TorchData: PyTorch Composable Data loading utility library","image":"https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1330&q=80","mainEntityOfPage":{"@type":"WebPage","@id":"https://aniketmaurya.com/pytorch/2022/04/09/TorchData.html"},"url":"https://aniketmaurya.com/pytorch/2022/04/09/TorchData.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-04-10T00:00:00-05:00","datePublished":"2022-04-10T00:00:00-05:00","description":"Learn How to load image data with TorchData and train Image classifier","headline":"TorchData: PyTorch Composable Data loading utility library","image":"https://images.unsplash.com/photo-1543674892-7d64d45df18b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1330&q=80","mainEntityOfPage":{"@type":"WebPage","@id":"https://aniketmaurya.com/pytorch/2022/04/10/TorchData.html"},"url":"https://aniketmaurya.com/pytorch/2022/04/10/TorchData.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://aniketmaurya.com/feed.xml" title="AI with Aniket" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -90,13 +90,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">TorchData: PyTorch Composable Data loading utility library</h1><p class="page-description">Learn How to load image data with TorchData and train Image classifier</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-04-09T00:00:00-05:00" itemprop="datePublished">
-        Apr 9, 2022
+    <h1 class="post-title p-name" itemprop="name headline">TorchData: PyTorch Composable Data loading utility library</h1><p class="page-description">Learn How to load image data with TorchData and train Image classifier</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-04-10T00:00:00-05:00" itemprop="datePublished">
+        Apr 10, 2022
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      4 min read
     
 </span></p>
 
@@ -114,24 +114,24 @@ window.onload = wrap_img;
         <div class="pb-5 d-flex flex-justify-center">
           <div class="px-2">
 
-    <a href="https://github.com/aniketmaurya/blog-migration/tree/master/_notebooks/2022-04-10 TorchData.ipynb" role="button" target="_blank">
+    <a href="https://github.com/aniketmaurya/blog-migration/tree/master/_notebooks/2022-04-10-TorchData.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/aniketmaurya/blog-migration/master?filepath=_notebooks%2F2022-04-10+TorchData.ipynb" target="_blank">
+    <a href="https://mybinder.org/v2/gh/aniketmaurya/blog-migration/master?filepath=_notebooks%2F2022-04-10-TorchData.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://colab.research.google.com/github/aniketmaurya/blog-migration/blob/master/_notebooks/2022-04-10 TorchData.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/aniketmaurya/blog-migration/blob/master/_notebooks/2022-04-10-TorchData.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
           <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Faniketmaurya%2Fblog-migration%2Fblob%2Fmaster%2F_notebooks%2F2022-04-10+TorchData.ipynb" target="_blank">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Faniketmaurya%2Fblog-migration%2Fblob%2Fmaster%2F_notebooks%2F2022-04-10-TorchData.ipynb" target="_blank">
       <img class="notebook-badge-image" src="/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
   </a>
 </div>
@@ -142,12 +142,12 @@ window.onload = wrap_img;
   <div class="post-content e-content" itemprop="articleBody">
     <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#In-this-tutorial,-we-will-learn-about-TorchData">In this tutorial, we will learn about TorchData </a></li>
-<li class="toc-entry toc-h2"><a href="#Bonus:-Training-Image-Classifier-with-TorchData-⚡️">Bonus: Training Image Classifier with TorchData ⚡️ </a></li>
+<li class="toc-entry toc-h2"><a href="#Bonus:-Training-Image-Classifier-with-TorchData-x-Lightning-Flash-⚡️">Bonus: Training Image Classifier with TorchData x Lightning Flash ⚡️ </a></li>
 </ul><!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
-# file to edit: _notebooks/2022-04-10 TorchData.ipynb
+# file to edit: _notebooks/2022-04-10-TorchData.ipynb
 -->
 
 <div class="container" id="notebook-container">
@@ -293,7 +293,7 @@ Basically, TorchData has already implemented 50 DataPipes which you can use dire
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We don't need the header of csv in our datapipe (<code>[id, label]</code>), so we will use the inbuilt <code>Filter</code> DataPipe to remove it.</p>
+<p>We don't need the header of csv in our datapipe (<code>[id, label]</code>), so we will pass <code>skip_lines=1</code> to the <code>parse_csv</code> method.</p>
 
 </div>
 </div>
@@ -305,12 +305,15 @@ Basically, TorchData has already implemented 50 DataPipes which you can use dire
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">csv_dp</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="s2">"label"</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">csv_dp</span><span class="p">]))}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">csv_dp</span> <span class="o">=</span> <span class="n">FileLister</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">/../trainLabels.csv"</span><span class="p">)</span>
+<span class="n">csv_dp</span> <span class="o">=</span> <span class="n">FileOpener</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">)</span>
+<span class="n">csv_dp</span> <span class="o">=</span> <span class="n">csv_dp</span><span class="o">.</span><span class="n">parse_csv</span><span class="p">(</span><span class="n">skip_lines</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">:</span> <span class="k">break</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">:</span> <span class="k">break</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">csv_dp</span><span class="p">]))}</span>
 </pre></div>
 
     </div>
@@ -328,6 +331,12 @@ Basically, TorchData has already implemented 50 DataPipes which you can use dire
 ['3', 'truck']
 ['4', 'deer']
 ['5', 'automobile']
+['6', 'automobile']
+['7', 'bird']
+['8', 'horse']
+['9', 'ship']
+['10', 'cat']
+['11', 'deer']
 </pre>
 </div>
 </div>
@@ -341,7 +350,7 @@ Basically, TorchData has already implemented 50 DataPipes which you can use dire
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we have a DataPipe <code>csv_dp</code> which flows <code>file id</code> and <code>label</code>. We need to conver the file id into filepath and label in label index.</p>
+<p>Now, we have a DataPipe <code>csv_dp</code> which flows <code>file id</code> and <code>label</code>. We need to convert the file id into filepath and label in label index.</p>
 <p>We can map functions to the DataPipe and even form a chain of mapping to apply transformations.</p>
 
 </div>
@@ -563,10 +572,10 @@ Basically, TorchData has already implemented 50 DataPipes which you can use dire
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Bonus:-Training-Image-Classifier-with-TorchData-⚡️">
-<a class="anchor" href="#Bonus:-Training-Image-Classifier-with-TorchData-%E2%9A%A1%EF%B8%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bonus: Training Image Classifier with TorchData ⚡️<a class="anchor-link" href="#Bonus:-Training-Image-Classifier-with-TorchData-%E2%9A%A1%EF%B8%8F"> </a>
+<h2 id="Bonus:-Training-Image-Classifier-with-TorchData-x-Lightning-Flash-⚡️">
+<a class="anchor" href="#Bonus:-Training-Image-Classifier-with-TorchData-x-Lightning-Flash-%E2%9A%A1%EF%B8%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bonus: Training Image Classifier with TorchData x Lightning Flash ⚡️<a class="anchor-link" href="#Bonus:-Training-Image-Classifier-with-TorchData-x-Lightning-Flash-%E2%9A%A1%EF%B8%8F"> </a>
 </h2>
-<p>If you have come this far then I have a bonus for you. Train an image classifier using DataPipe and PyTorch Lightning Flash ⚡️</p>
+<p>If you have come this far then I have a bonus for you. Train an image classifier using DataPipe and <a href="https://lightning-flash.readthedocs.io/en/latest/">PyTorch Lightning Flash</a> ⚡️</p>
 <p>Flash expects the dataloader to be in form of a dictionary with keys <code>input</code> and <code>target</code> where input will contain our image tensor and target will be the label index.</p>
 
 </div>
@@ -592,7 +601,12 @@ Basically, TorchData has already implemented 50 DataPipes which you can use dire
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As we discussed that <code>DataPipes</code> are fully compatible with DataLoader so this is how you convert a DataPipe to DataLoader.</p>
+<p>As we discussed that <code>DataPipes</code> are fully compatible with DataLoader so this is how you convert a DataPipe to DataLoader.
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    <strong>Note: </strong><code>DataPipe</code> supports shuffling and batching as well but this must be used either in DataPipe or DataLoader, otherwise the samples will be batched/shuffled more than once.
+</div>
 
 </div>
 </div>
@@ -664,7 +678,7 @@ Basically, TorchData has already implemented 50 DataPipes which you can use dire
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/pytorch/2022/04/09/TorchData.html" hidden></a>
+</script><a class="u-url" href="/pytorch/2022/04/10/TorchData.html" hidden></a>
 </article>
 
       </div>
