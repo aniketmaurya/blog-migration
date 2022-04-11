@@ -4,20 +4,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>About Me | AI with Aniket</title>
+<title>Normalization | AI with Aniket</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="About Me" />
+<meta property="og:title" content="Normalization" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Blogs on Machine Learning, Deep Learning and Software Development" />
-<meta property="og:description" content="Blogs on Machine Learning, Deep Learning and Software Development" />
-<link rel="canonical" href="https://aniketmaurya.com/about/" />
-<meta property="og:url" content="https://aniketmaurya.com/about/" />
+<meta name="description" content="Normalization techniques and effect of normalization." />
+<meta property="og:description" content="Normalization techniques and effect of normalization." />
+<link rel="canonical" href="https://aniketmaurya.com/deep%20learning/machine%20learning/2020/04/26/Normalization.html" />
+<meta property="og:url" content="https://aniketmaurya.com/deep%20learning/machine%20learning/2020/04/26/Normalization.html" />
 <meta property="og:site_name" content="AI with Aniket" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="About Me" />
+<meta property="og:image" content="https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-04-26-Normalization/0_y6ooHSrMwL6krpWY.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-26T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-04-26-Normalization/0_y6ooHSrMwL6krpWY.png" />
+<meta property="twitter:title" content="Normalization" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Blogs on Machine Learning, Deep Learning and Software Development","headline":"About Me","name":"AI with Aniket","url":"https://aniketmaurya.com/about/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-04-26T00:00:00-05:00","datePublished":"2020-04-26T00:00:00-05:00","description":"Normalization techniques and effect of normalization.","headline":"Normalization","image":"https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-04-26-Normalization/0_y6ooHSrMwL6krpWY.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://aniketmaurya.com/deep%20learning/machine%20learning/2020/04/26/Normalization.html"},"url":"https://aniketmaurya.com/deep%20learning/machine%20learning/2020/04/26/Normalization.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://aniketmaurya.com/feed.xml" title="AI with Aniket" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -84,42 +87,66 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title">About Me</h1>
-  </header>
+    <h1 class="post-title p-name" itemprop="name headline">Normalization</h1><p class="page-description">Normalization techniques and effect of normalization.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-26T00:00:00-05:00" itemprop="datePublished">
+        Apr 26, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
 
-  <div class="post-content">
-    <!-- ![alt text](https://avatars2.githubusercontent.com/u/21018714?s=460&u=f522c89f28b5a41593eb851cd85c58c3a7422fdf&v=4 =240x) -->
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Deep Learning">Deep Learning</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Machine Learning">Machine Learning</a>
+        
+      
+      </p>
+    
 
-<p><img src="https://ik.imagekit.io/aniket/aniket-cropped-bg_oj2BphV1g.png" height="300" /></p>
+    </header>
 
-<p>👋 I’m a Developer Advocate at <a href="https://grid.ai">Grid.ai</a> | <a href="https://www.pytorchlightning.ai/">PyTorch Lightning</a> 🥑⚡️. I build Intelligent Software with ML and create/maintain some cool open-source ML/DL/Python libraries.<br />
-I’ve created <a href="https://github.com/gradsflow/gradsflow">Gradsflow</a> and <a href="https://chitra.readthedocs.io/en/latest/">Chitra</a> - Python Libraries with aim to simplify AutoML and MLOps.</p>
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#normalization-in-deep-learning">Normalization in Deep Learning</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#why-do-we-need-to-normalize-in-the-first-place">Why do we need to Normalize in the first place?</a></li>
+</ul>
+</li>
+</ul><h1 id="normalization-in-deep-learning">
+<a class="anchor" href="#normalization-in-deep-learning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Normalization in Deep Learning</h1>
 
-<p>I love building problem solving products that leverage Artificial Intelligence.
-I’ve expertise in building and deploying scalable Deep Learning system in production. I’ve worked on complete end-to-end process of Deep Learning i.e. Data creation, Model Training, API Development to Deployment.</p>
+<p>Normalization is an important technique widely used in Deep Learning to achieve better results in less time.</p>
 
-<p>I believe in continuous learning, open-source and knowledge sharing.
-Started my <a href="https://www.youtube.com/channel/UCRuFsj94hWecPkuEr4f5Xww">YouTube channel</a> to share educational video tutorials and tech Meetup on Machine Learning and Python Software development.</p>
+<h3 id="why-do-we-need-to-normalize-in-the-first-place">
+<a class="anchor" href="#why-do-we-need-to-normalize-in-the-first-place" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why do we need to Normalize in the first place?</h3>
 
-<!-- credits: https://github.com/sayakpaul/portfolio/blob/master/_pages/about.md -->
-<table>
-  <tr>
-    <td><a href="https://github.com/aniketmaurya"><img src="https://img.shields.io/github/followers/aniketmaurya.svg?label=GitHub&amp;style=social" alt="GitHub" /></a></td>
-    <td><a href="https://twitter.com/aniketmaurya"><img src="https://img.shields.io/twitter/follow/aniketmaurya?label=Twitter&amp;style=social" alt="Twitter" /></a></td>
-    <td><a href="https://www.linkedin.com/in/aniketmaurya"><img src="https://img.shields.io/badge/LinkedIn--_.svg?style=social&amp;logo=linkedin" alt="LinkedIn" /></a></td>
-    <td><a href="mailto:theaniketmaurya@gmail.com"><img src="https://img.shields.io/badge/Gmail--_.svg?style=social&amp;logo=gmail" alt="Gmail" /></a></td>
-  </tr>
-</table>
+<p><strong>Covariate Shift:</strong> Most of the time the training dataset is very different from the real dataset. Suppose, a CNN model is trained to classify cats. But the training dataset only had images of black cats. So, if the model is fed with an image of a white cat it may not predict correctly.
+This phenomenon is called <strong>Covariate-Shift</strong>.</p>
 
-<p>Contact me to talk about ML/AI, freelancing or consulation.</p>
+<p>In the graph below, the training data mostly falls on a linear function. But after including test data it looks more like a quadratic distribution.</p>
 
-<p><sup><sub>This website is powered by <em><a href="https://github.com/fastai/fastpages">fastpages</a></em></sub></sup></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*y6ooHSrMwL6krpWY.png" alt="[Source](http://iwann.ugr.es/2011/pdf/InvitedTalk-FHerrera-IWANN11.pdf): [http://iwann.ugr.es/2011/pdf/InvitedTalk-FHerrera-IWANN11.pdf](http://iwann.ugr.es/2011/pdf/InvitedTalk-FHerrera-IWANN11.pdf)"><em><a href="http://iwann.ugr.es/2011/pdf/InvitedTalk-FHerrera-IWANN11.pdf">Source</a>: <a href="http://iwann.ugr.es/2011/pdf/InvitedTalk-FHerrera-IWANN11.pdf">http://iwann.ugr.es/2011/pdf/InvitedTalk-FHerrera-IWANN11.pdf</a></em></p>
 
-  </div>
+<p>Generally in image datasets, the distribution can change because of change in camera resolutions or any other environmental change.</p>
 
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="aniketmaurya/blog-migration"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/deep%20learning/machine%20learning/2020/04/26/Normalization.html" hidden></a>
 </article>
 
       </div>

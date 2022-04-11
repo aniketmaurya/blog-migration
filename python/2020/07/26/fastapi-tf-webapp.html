@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Building Machine Learning API with FastAPI and Tensorflow | AI with Aniket</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Building Machine Learning API with FastAPI and Tensorflow" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Tutorial on FastAPI - high performance asynchronous framework for faster development of production ready APIs." />
+<meta property="og:description" content="Tutorial on FastAPI - high performance asynchronous framework for faster development of production ready APIs." />
+<link rel="canonical" href="https://aniketmaurya.com/python/2020/07/26/fastapi-tf-webapp.html" />
+<meta property="og:url" content="https://aniketmaurya.com/python/2020/07/26/fastapi-tf-webapp.html" />
+<meta property="og:site_name" content="AI with Aniket" />
+<meta property="og:image" content="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-26T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" />
+<meta property="twitter:title" content="Building Machine Learning API with FastAPI and Tensorflow" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-07-26T00:00:00-05:00","datePublished":"2020-07-26T00:00:00-05:00","description":"Tutorial on FastAPI - high performance asynchronous framework for faster development of production ready APIs.","headline":"Building Machine Learning API with FastAPI and Tensorflow","image":"https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://aniketmaurya.com/python/2020/07/26/fastapi-tf-webapp.html"},"url":"https://aniketmaurya.com/python/2020/07/26/fastapi-tf-webapp.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://aniketmaurya.com/feed.xml" title="AI with Aniket" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QD11JWMMPF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QD11JWMMPF');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">AI with Aniket</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Building Machine Learning API with FastAPI and Tensorflow</h1><p class="page-description">Tutorial on FastAPI - high performance asynchronous framework for faster development of production ready APIs.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-07-26T00:00:00-05:00" itemprop="datePublished">
+        Jul 26, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#hello-world-of-fastapi">hello-world of FastAPI</a></li>
+<li class="toc-entry toc-h1"><a href="#pydantic-support">Pydantic support</a></li>
+<li class="toc-entry toc-h1"><a href="#covid-19-symptom-checker-api">Covid-19 symptom checker API</a></li>
+<li class="toc-entry toc-h1"><a href="#image-recognition-api">Image recognition API</a></li>
+<li class="toc-entry toc-h1"><a href="#final-code">Final code</a></li>
+</ul><p><em>Youtube tutorial version of this blog is also available</em></p>
+<iframe width="540" height="480" src="https://www.youtube.com/embed/23R2eI95S30?start=32" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<p>FastAPI is a high-performance asynchronous framework for building APIs in Python.
+It provides support for Swagger UI out of the box.</p>
+
+<blockquote>
+  <p>Source code for this blog is available <a href="https://github.com/aniketmaurya/tensorflow-web-app-starter-pack">aniketmaurya/tensorflow-fastapi-starter-pack</a></p>
+</blockquote>
+
+<h1 id="hello-world-of-fastapi">
+<a class="anchor" href="#hello-world-of-fastapi" aria-hidden="true"><span class="octicon octicon-link"></span></a>hello-world of FastAPI</h1>
+
+<p>First, we import <code class="language-plaintext highlighter-rouge">FastAPI</code> class and create an object <code class="language-plaintext highlighter-rouge">app</code>. This class has useful <a href="https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30">parameters</a> like we can pass the title and description for Swagger UI.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">'Hello world'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">'This is a hello world example'</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s">'0.0.1'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We define a function and decorate it with <code class="language-plaintext highlighter-rouge">@app.get</code>. This means that our API <code class="language-plaintext highlighter-rouge">/index</code> supports the GET method. The function defined here is <strong>async</strong>, FastAPI automatically takes care of async and without async methods by creating a thread pool for the normal def functions and it uses an async event loop for async functions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/index'</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">hello_world</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">"hello world"</span>
+</code></pre></div></div>
+
+<h1 id="pydantic-support">
+<a class="anchor" href="#pydantic-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pydantic support</h1>
+
+<p>One of my favorite features offered by FastAPI is Pydantic support. We can define Pydantic models and request-response will be handled by FastAPI for these models.
+Let’s create a COVID-19 symptom checker API to understand this.</p>
+
+<h1 id="covid-19-symptom-checker-api">
+<a class="anchor" href="#covid-19-symptom-checker-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Covid-19 symptom checker API</h1>
+<p>We create a request body, it is the format in which the client should send the request. It will be used by Swagger UI.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="k">class</span> <span class="nc">Symptom</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">fever</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">dry_cough</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">tiredness</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">breathing_problem</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+</code></pre></div></div>
+
+<p>Let’s create a function to assign a risk level based on the inputs.</p>
+
+<blockquote>
+  <p>This is just for learning and should not be used in real life, better consult a doctor.</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_risk_level</span><span class="p">(</span><span class="n">symptom</span><span class="p">:</span> <span class="n">Symptom</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">symptom</span><span class="p">.</span><span class="n">fever</span> <span class="ow">or</span> <span class="n">symptom</span><span class="p">.</span><span class="n">dry_cough</span> <span class="ow">or</span> <span class="n">symptom</span><span class="p">.</span><span class="n">tiredness</span> <span class="ow">or</span> <span class="n">symptom</span><span class="p">.</span><span class="n">breathing_problem</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">'Low risk level. THIS IS A DEMO APP'</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">symptom</span><span class="p">.</span><span class="n">breathing_problem</span> <span class="ow">or</span> <span class="n">symptom</span><span class="p">.</span><span class="n">dry_cough</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">symptom</span><span class="p">.</span><span class="n">fever</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">'moderate risk level. THIS IS A DEMO APP'</span>
+    
+    <span class="k">if</span> <span class="n">symptom</span><span class="p">.</span><span class="n">breathing_problem</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">'High-risk level. THIS IS A DEMO APP'</span>
+    
+    <span class="k">return</span> <span class="s">'THIS IS A DEMO APP'</span>
+
+</code></pre></div></div>
+
+<p>Let’s create the API for checking the symptoms</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/api/covid-symptom-check'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_risk</span><span class="p">(</span><span class="n">symptom</span><span class="p">:</span> <span class="n">Symptom</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">get_risk_level</span><span class="p">(</span><span class="n">symptom</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="image-recognition-api">
+<a class="anchor" href="#image-recognition-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Image recognition API</h1>
+
+<p>We will create an API to classify images, we name it <code class="language-plaintext highlighter-rouge">predict/image</code>.
+We will use Tensorflow for creating the image classification model.</p>
+
+<blockquote>
+  <p>Tutorial for <a href="https://aniketmaurya.ml/blog/tensorflow/deep%20learning/2019/05/12/image-classification-with-tf2.html">Image Classification with Tensorflow</a></p>
+</blockquote>
+
+<p>We create a function <code class="language-plaintext highlighter-rouge">load_model</code>, which will return a MobileNet CNN Model with pre-trained weights i.e. it is already trained to classify 1000 unique categories of images.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+
+<span class="k">def</span> <span class="nf">load_model</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">applications</span><span class="p">.</span><span class="n">MobileNetV2</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s">"imagenet"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Model loaded"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>We define a <code class="language-plaintext highlighter-rouge">predict</code> function that will accept an image and returns the predictions.
+We resize the image to 224x224 and normalize the pixel values to be in <strong>[-1, 1]</strong>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tensorflow.keras.applications.imagenet_utils</span> <span class="kn">import</span> <span class="n">decode_predictions</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">decode_predictions</code> is used to decode the class name of the predicted object. 
+Here we will return the top-2 probable class.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">):</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)))[...,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span> <span class="o">/</span> <span class="mf">127.5</span> <span class="o">-</span> <span class="mf">1.0</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">decode_predictions</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">"class"</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">"confidence"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">:</span><span class="mf">0.2</span><span class="n">f</span><span class="si">}</span><span class="s"> %"</span>
+
+        <span class="n">response</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></div>
+
+<p>Now we will create an API <code class="language-plaintext highlighter-rouge">/predict/image</code> which supports file upload. We will filter the file extension to support only jpg, jpeg, and png format of images.</p>
+
+<p>We will use Pillow to load the uploaded image.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">read_imagefile</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">:</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">image</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">"/predict/image"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">predict_api</span><span class="p">(</span><span class="nb">file</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">=</span> <span class="n">File</span><span class="p">(...)):</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">filename</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"jpg"</span><span class="p">,</span> <span class="s">"jpeg"</span><span class="p">,</span> <span class="s">"png"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">extension</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Image must be jpg or png format!"</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">read_imagefile</span><span class="p">(</span><span class="k">await</span> <span class="nb">file</span><span class="p">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">prediction</span>
+</code></pre></div></div>
+
+<h1 id="final-code">
+<a class="anchor" href="#final-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Final code</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">uvicorn</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">File</span><span class="p">,</span> <span class="n">UploadFile</span>
+
+<span class="kn">from</span> <span class="nn">application.components</span> <span class="kn">import</span> <span class="n">predict</span><span class="p">,</span> <span class="n">read_imagefile</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">"/predict/image"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">predict_api</span><span class="p">(</span><span class="nb">file</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">=</span> <span class="n">File</span><span class="p">(...)):</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">filename</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"jpg"</span><span class="p">,</span> <span class="s">"jpeg"</span><span class="p">,</span> <span class="s">"png"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">extension</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Image must be jpg or png format!"</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">read_imagefile</span><span class="p">(</span><span class="k">await</span> <span class="nb">file</span><span class="p">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">prediction</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">"/api/covid-symptom-check"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_risk</span><span class="p">(</span><span class="n">symptom</span><span class="p">:</span> <span class="n">Symptom</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">symptom_check</span><span class="p">.</span><span class="n">get_risk_level</span><span class="p">(</span><span class="n">symptom</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">uvicorn</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p><a href="https://fastapi.tiangolo.com/">FastAPI documentation</a> is the best place to learn more about core concepts of the framework.</p>
+</blockquote>
+
+<hr>
+
+<p><br></p>
+<blockquote>
+  <p>Hope you liked the article.</p>
+</blockquote>
+
+<p>Feel free to ask your questions in the comments or reach me out personally</p>
+
+<p>👉 Twitter: <a href="https://twitter.com/aniketmaurya">https://twitter.com/aniketmaurya</a></p>
+
+<p>👉 Linkedin: <a href="https://linkedin.com/in/aniketmaurya">https://linkedin.com/in/aniketmaurya</a></p>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="aniketmaurya/blog-migration"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/python/2020/07/26/fastapi-tf-webapp.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Blogs on Machine Learning, Deep Learning and Software Development</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/aniketmaurya" target="_blank" title="aniketmaurya"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/aniketmaurya" target="_blank" title="aniketmaurya"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
